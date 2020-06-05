@@ -18,7 +18,7 @@ const MyApp: FC<any> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>App Title</title>
+        <title>Calculator</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
