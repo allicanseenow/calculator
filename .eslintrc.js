@@ -38,6 +38,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     "react/no-unescaped-entities": ["off"],
     "react/jsx-filename-extension": ["error", { 'extensions': ['.tsx'] }],
+    'no-useless-return': 'off',
     'no-unused-vars': 'off',
     quotes: [2, 'single', { avoidEscape: true }],
     semi: [2, 'always']

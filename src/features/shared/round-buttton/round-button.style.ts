@@ -13,7 +13,7 @@ export const useStyles = makeStyles({
   },
   label: {
     fontSize: 26,
-    fontWeight: '500',
+    fontWeight: 500,
   },
   number: {
     backgroundColor: '#333333',
@@ -37,6 +37,11 @@ export const useStyles = makeStyles({
     },
   },
   active: {
-
-  }
+    // Documentation: https://cssinjs.org/jss-plugin-nested/?v=v10.0.0#use-rulename-to-reference-a-local-rule-within-the-same-style-sheet
+    // this is equivalent to ".active.operator" in normal CSS
+    '&$operator': {
+      backgroundColor: 'white',
+      color: '#FC9428',
+    },
+  },
 });

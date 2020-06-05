@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
   container: {
     // minWidth: 400,
+    maxWidth: 340,
     minHeight: 400,
     background: 'black',
     borderRadius: 10,
@@ -14,16 +15,15 @@ export const useStyles = makeStyles({
   },
   resultContainer: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
   },
   result: {
     fontSize: 45,
+    lineHeight: 1.2,
   },
-  buttonContainer: {
-    marginTop: '1rem',
-  },
-  row: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
+  subRow: {
+    fontSize: 15,
+    lineHeight: 1.2,
   },
 });
