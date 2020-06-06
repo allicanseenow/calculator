@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import {CalculationOperator, StringOperator} from '../models/operator';
+import { CalculationOperator, StringOperator } from '../models/operator';
 
 const getNumberOfDigits = (number: number) => {
   return `${number}`.replace('.', '').length;

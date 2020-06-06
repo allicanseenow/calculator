@@ -1,8 +1,4 @@
-export type CalculationOperator =
-  | 'addition'
-  | 'subtraction'
-  | 'multiplication'
-  | 'division';
+export type CalculationOperator = 'addition' | 'subtraction' | 'multiplication' | 'division';
 
 export type StringOperator =
   | 'clear'
