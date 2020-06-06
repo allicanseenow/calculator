@@ -1,6 +1,6 @@
 import { StringOperator, getSymbolOperator } from '../models/operator';
 
-const parseValue = (value: string) => (+value).toLocaleString(undefined, { maximumFractionDigits: 10 });
+const parseValue = (value: string) => (+value).toLocaleString(undefined, { maximumSignificantDigits: 11 });
 
 type GetResultsParams = {
   activeOperator?: StringOperator;
