@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
   container: {
     // minWidth: 400,
-    maxWidth: 340,
     minHeight: 400,
     background: 'black',
     borderRadius: 10,

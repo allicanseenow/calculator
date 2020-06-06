@@ -6,7 +6,7 @@ import { useStyles } from './round-button.style';
 import { StringOperator } from '../../calculator/models/operator';
 
 type RoundButton = {
-  type: 'number' | 'operator' | 'utility';
+  type: 'number' | 'operator' | 'utility' | 'scientific';
   isActive?: boolean;
   children?: ReactNode;
   span?: number;

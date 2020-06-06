@@ -44,4 +44,15 @@ export const useStyles = makeStyles({
       color: '#FC9428',
     },
   },
+  scientific: {
+    backgroundColor: '#262323',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: '#1a1919',
+    },
+    '& .MuiButton-label': {
+      fontSize: 15,
+      textTransform: 'none',
+    },
+  },
 });
