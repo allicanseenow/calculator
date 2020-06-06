@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 import { CalculationOperator, StringOperator } from '../models/operator';
+import { getCalculatedResult } from './display';
 
 const getNumberOfDigits = (number: number) => {
   return `${number}`.replace('.', '').length;
@@ -49,8 +50,9 @@ type CalculateValueParams = {
   setCurrentValue: Dispatch<SetStateAction<string>>;
   setNewValue: Dispatch<SetStateAction<string>>;
   setActiveOperator: Dispatch<SetStateAction<CalculationOperator | undefined>>;
-  operator: StringOperator;
+  activeOperator: CalculationOperator;
   setDoneCalculation: Dispatch<SetStateAction<boolean>>;
+  saveHistory: (value: { type: 'add'; newHistoryEntry: string }) => any;
 };
 
 export const calculateValue = ({
@@ -58,26 +60,36 @@ export const calculateValue = ({
   newValue,
   setCurrentValue,
   setNewValue,
-  operator,
+  activeOperator,
   setActiveOperator,
   setDoneCalculation,
+  saveHistory,
 }: CalculateValueParams) => {
-  switch (operator) {
+  let result = '';
+  switch (activeOperator) {
     case 'addition':
-      setCurrentValue(parseDisplayedResult(+currentValue + +newValue));
+      result = parseDisplayedResult(+currentValue + +newValue);
+      setCurrentValue(result);
       break;
     case 'subtraction':
-      setCurrentValue(parseDisplayedResult(+currentValue - +newValue));
+      result = parseDisplayedResult(+currentValue - +newValue);
+      setCurrentValue(result);
       break;
     case 'multiplication':
-      setCurrentValue(parseDisplayedResult(+currentValue * +newValue));
+      result = parseDisplayedResult(+currentValue * +newValue);
+      setCurrentValue(result);
       break;
     case 'division':
-      setCurrentValue(parseDisplayedResult(+currentValue / +newValue));
+      result = parseDisplayedResult(+currentValue / +newValue);
+      setCurrentValue(result);
       break;
     default:
       return;
   }
+  saveHistory({
+    type: 'add',
+    newHistoryEntry: getCalculatedResult({ newValue, currentValue, activeOperator, result }),
+  });
   setNewValue('0');
   setActiveOperator(undefined);
   setDoneCalculation(true);

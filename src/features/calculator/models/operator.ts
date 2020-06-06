@@ -18,4 +18,4 @@ const SymbolOperator = new Map([
   ['division', '÷'],
 ]);
 
-export const getSymbolOperator = (stringOperator: StringOperator) => SymbolOperator.get(stringOperator);
+export const getSymbolOperator = (stringOperator: CalculationOperator) => SymbolOperator.get(stringOperator);

@@ -1,9 +1,19 @@
-import { StringOperator, getSymbolOperator } from '../models/operator';
+import { getSymbolOperator, CalculationOperator } from '../models/operator';
 
 const parseValue = (value: string) => (+value).toLocaleString(undefined, { maximumSignificantDigits: 11 });
 
+type CalculatedResult = {
+  activeOperator: CalculationOperator;
+  newValue: string;
+  currentValue: string;
+  result: string;
+};
+
+export const getCalculatedResult = ({ currentValue, newValue, activeOperator, result }: CalculatedResult) =>
+  `${currentValue} ${getSymbolOperator(activeOperator)} ${newValue} = ${result}`;
+
 type GetResultsParams = {
-  activeOperator?: StringOperator;
+  activeOperator?: CalculationOperator;
   newValue: string;
   currentValue: string;
 };

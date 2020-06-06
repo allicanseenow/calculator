@@ -1,10 +1,14 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 
 import { CalculatorPresentational } from './calculator.presentational';
 import { CalculationOperator, StringOperator } from '../models/operator';
 import { calculateValue, getDisplayedResults, selectNumber, selectOperator } from '../functions';
 
-export const Calculator = () => {
+type Calculator = {
+  saveHistory: (value: { type: 'add'; newHistoryEntry: string }) => any;
+};
+
+export const Calculator: FC<Calculator> = ({ saveHistory }) => {
   const [activeOperator, setActiveOperator] = useState<CalculationOperator>();
   const [currentValue, setCurrentValue] = useState<string>('0');
   const [newValue, setNewValue] = useState<string>('0');
@@ -45,16 +49,17 @@ export const Calculator = () => {
   const onClickCalculate = useCallback(() => {
     if (activeOperator) {
       calculateValue({
-        operator: activeOperator,
+        activeOperator,
         setActiveOperator,
         currentValue,
         newValue,
         setCurrentValue,
         setNewValue,
         setDoneCalculation,
+        saveHistory,
       });
     }
-  }, [activeOperator, currentValue, newValue]);
+  }, [activeOperator, currentValue, newValue, saveHistory]);
 
   const { mainRow, subRow } = useMemo(() => {
     return getDisplayedResults({ activeOperator, currentValue, newValue });

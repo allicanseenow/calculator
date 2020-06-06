@@ -8,6 +8,7 @@ export const useStyles = makeStyles({
     background: 'black',
     borderRadius: 10,
     color: 'white',
+    marginTop: '2rem',
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: '1rem',
