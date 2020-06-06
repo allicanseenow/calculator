@@ -1,10 +1,8 @@
-# Next.js - Material UI Boilerplate 
+# Calculator
 
-Personal boilerplate that uses Nex.js. This branch has Material-UI integrated.
-
-### Prerequisites
-
-Node.js, Intellij which supports Eslint + Prettier (Needs to allow Intellij to use Eslint)
+Application is deployed at: https://calculator-no3nkhpyp.now.sh/
+<br>
+Try out the app at a desktop-screen size and a mobile screen size.
 
 ### Installing
 

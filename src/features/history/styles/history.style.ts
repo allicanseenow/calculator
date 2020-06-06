@@ -13,7 +13,7 @@ export const useStyles = makeStyles({
   },
   historyTitle: {
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 26,
     marginBottom: '1.5rem',
   },
   historyContainer: {

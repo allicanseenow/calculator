@@ -15,7 +15,7 @@ export const History: FC<History> = ({ history }) => {
   return (
     <div className={classes.container}>
       <div className={classes.innerContainer}>
-        <h3 className={classes.historyTitle}>History</h3>
+        <h3 className={classes.historyTitle}>History (Max: 10 entries)</h3>
         <div className={classes.historyContainer}>
           {history.map((historyEntry) => {
             return (
