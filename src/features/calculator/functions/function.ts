@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { StringOperator } from '../models/operator';
+import {CalculationOperator, StringOperator} from '../models/operator';
 
 const getNumberOfDigits = (number: number) => {
   return `${number}`.replace('.', '').length;
@@ -48,7 +48,7 @@ type CalculateValueParams = {
   newValue: string;
   setCurrentValue: Dispatch<SetStateAction<string>>;
   setNewValue: Dispatch<SetStateAction<string>>;
-  setActiveOperator: Dispatch<SetStateAction<StringOperator | undefined>>;
+  setActiveOperator: Dispatch<SetStateAction<CalculationOperator | undefined>>;
   operator: StringOperator;
   setDoneCalculation: Dispatch<SetStateAction<boolean>>;
 };
@@ -73,9 +73,6 @@ export const calculateValue = ({
       setCurrentValue(parseDisplayedResult(+currentValue * +newValue));
       break;
     case 'division':
-      console.log('currentValue is ', currentValue)
-      console.log('newValue is ', newValue)
-      console.log('+currentValue / +newValue is ', +currentValue / +newValue)
       setCurrentValue(parseDisplayedResult(+currentValue / +newValue));
       break;
     default:
@@ -89,7 +86,7 @@ export const calculateValue = ({
 type SelectOperatorParams = {
   operator: StringOperator;
   activeOperator?: StringOperator;
-  setActiveOperator: Dispatch<SetStateAction<StringOperator | undefined>>;
+  setActiveOperator: Dispatch<SetStateAction<CalculationOperator | undefined>>;
   setCurrentValue: Dispatch<SetStateAction<string>>;
   setNewValue: Dispatch<SetStateAction<string>>;
   setDoneCalculation: Dispatch<SetStateAction<boolean>>;
@@ -107,29 +104,35 @@ export const selectOperator = ({
   newValue,
   setDoneCalculation,
 }: SelectOperatorParams) => {
+  const value = activeOperator ? newValue : currentValue;
+  const setValue = activeOperator ? setNewValue : setCurrentValue;
+
   switch (operator) {
     case 'addition':
     case 'multiplication':
     case 'division':
     case 'subtraction':
-    case 'remainder':
       setDoneCalculation(false);
-      return setActiveOperator(operator);
-    case 'absolute': {
-      const value = operator ? newValue : currentValue;
-      const setValue = operator ? setNewValue : setCurrentValue;
-      setDoneCalculation(false);
-      return setValue(`${Math.abs(+value)}`);
+      setActiveOperator(operator);
+      break;
+    case 'remainder': {
+      const a = +value / 100;
+      setValue(`${+value / 100}`);
+      break;
     }
-    case 'clear':
+    case 'absolute': {
+      if (value.startsWith('-')) setValue(value.replace('-', ''));
+      else if (value !== '0') setValue(`-${value}`);
+      break;
+    }
+    case 'clear': {
       setCurrentValue('0');
       setNewValue('0');
       setActiveOperator(undefined);
       setDoneCalculation(false);
       break;
+    }
     case 'dot': {
-      const value = activeOperator ? newValue : currentValue;
-      const setValue = activeOperator ? setNewValue : setCurrentValue;
       if (!value.includes('.')) setValue(`${value}.`);
       break;
     }

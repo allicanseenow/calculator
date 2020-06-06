@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
 import { CalculatorPresentational } from './calculator.presentational';
-import { StringOperator } from '../models/operator';
-import { calculateValue, selectNumber, selectOperator } from '../functions';
+import { CalculationOperator, StringOperator } from '../models/operator';
+import { calculateValue, getDisplayedResults, selectNumber, selectOperator } from '../functions';
 
 export const Calculator = () => {
-  const [activeOperator, setActiveOperator] = useState<StringOperator>();
+  const [activeOperator, setActiveOperator] = useState<CalculationOperator>();
   const [currentValue, setCurrentValue] = useState<string>('0');
   const [newValue, setNewValue] = useState<string>('0');
   const [doneCalculation, setDoneCalculation] = useState(false);
@@ -23,7 +23,7 @@ export const Calculator = () => {
         setDoneCalculation,
       });
     },
-    [activeOperator, currentValue, newValue]
+    [activeOperator, currentValue, doneCalculation, newValue]
   );
 
   const onClickOperator = useCallback(
@@ -39,7 +39,7 @@ export const Calculator = () => {
         setDoneCalculation,
       });
     },
-    [currentValue, newValue]
+    [activeOperator, currentValue, newValue]
   );
 
   const onClickCalculate = useCallback(() => {
@@ -57,13 +57,7 @@ export const Calculator = () => {
   }, [activeOperator, currentValue, newValue]);
 
   const { mainRow, subRow } = useMemo(() => {
-    if (activeOperator) {
-      return {
-        mainRow: newValue === '0' ? (+currentValue).toLocaleString() : (+newValue).toLocaleString(),
-        subRow: `${currentValue} ${activeOperator} ${newValue}`,
-      };
-    }
-    return { mainRow: (+currentValue).toLocaleString(), subRow: '' };
+    return getDisplayedResults({ activeOperator, currentValue, newValue });
   }, [activeOperator, currentValue, newValue]);
 
   return (

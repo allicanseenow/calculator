@@ -3,10 +3,10 @@ import { Grid } from '@material-ui/core';
 
 import { RoundButton } from '../../shared';
 import { useStyles } from '../styles/calculator-body.style';
-import { StringOperator } from '../models/operator';
+import { CalculationOperator, StringOperator } from '../models/operator';
 
 type CalculatorBody = {
-  activeOperator?: StringOperator;
+  activeOperator?: CalculationOperator;
   onClickNumber: (value: number) => any;
   onClickOperator: (value: StringOperator) => any;
   onClickCalculate: () => any;
@@ -15,6 +15,8 @@ type CalculatorBody = {
 export const CalculatorBody: FC<CalculatorBody> = memo(
   ({ activeOperator, onClickNumber, onClickOperator, onClickCalculate }) => {
     const classes = useStyles();
+
+    const isActiveOperator = (localOperator: CalculationOperator) => localOperator === activeOperator;
 
     return (
       <div className={classes.buttonContainer}>
@@ -28,8 +30,13 @@ export const CalculatorBody: FC<CalculatorBody> = memo(
           <RoundButton type="utility" onClick={onClickOperator} value="remainder">
             %
           </RoundButton>
-          <RoundButton type="operator" onClick={onClickOperator} value="division">
-            /
+          <RoundButton
+            isActive={isActiveOperator('division')}
+            type="operator"
+            onClick={onClickOperator}
+            value="division"
+          >
+            ÷
           </RoundButton>
         </Grid>
         <Grid className={classes.row}>
@@ -42,7 +49,12 @@ export const CalculatorBody: FC<CalculatorBody> = memo(
           <RoundButton type="number" onClick={onClickNumber} value={9}>
             9
           </RoundButton>
-          <RoundButton type="operator" onClick={onClickOperator} value="multiplication">
+          <RoundButton
+            isActive={isActiveOperator('multiplication')}
+            type="operator"
+            onClick={onClickOperator}
+            value="multiplication"
+          >
             X
           </RoundButton>
         </Grid>
@@ -56,7 +68,12 @@ export const CalculatorBody: FC<CalculatorBody> = memo(
           <RoundButton type="number" onClick={onClickNumber} value={6}>
             6
           </RoundButton>
-          <RoundButton type="operator" onClick={onClickOperator} value="subtraction">
+          <RoundButton
+            isActive={isActiveOperator('subtraction')}
+            type="operator"
+            onClick={onClickOperator}
+            value="subtraction"
+          >
             -
           </RoundButton>
         </Grid>
@@ -70,7 +87,12 @@ export const CalculatorBody: FC<CalculatorBody> = memo(
           <RoundButton type="number" onClick={onClickNumber} value={3}>
             3
           </RoundButton>
-          <RoundButton isActive type="operator" onClick={onClickOperator} value="addition">
+          <RoundButton
+            isActive={isActiveOperator('addition')}
+            type="operator"
+            onClick={onClickOperator}
+            value="addition"
+          >
             +
           </RoundButton>
         </Grid>

@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 
 import { useStyles } from '../styles/calculator.style';
 import { CalculatorBody } from './calculator-body';
-import { StringOperator } from '../models/operator';
+import { CalculationOperator, StringOperator } from '../models/operator';
 
 type CalculatorPresentational = {
-  activeOperator?: StringOperator;
+  activeOperator?: CalculationOperator;
   onClickNumber: (value: number) => any;
   onClickOperator: (value: StringOperator) => any;
   onClickCalculate: () => any;
